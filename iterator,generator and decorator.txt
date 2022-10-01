@@ -1,0 +1,176 @@
+1. Use iter and next method to access all the elements of a given set using while loop
+
+
+s={12,34,22,56,18,39}
+it=iter(s)
+while True:
+    print(next(it))
+
+
+
+
+2. Create a generator to produce first n odd natural numbers
+
+
+def oddgenerator(n):
+    a=1
+    while n:
+        yield a
+        a+=2
+        n-=1
+
+
+
+3. Create a generator to produce first n even natural numbers
+
+
+def evengenerator(n):
+    a=2
+    while n:
+        yield a
+        a+=2
+        n-=1
+
+
+
+4. Create a generator to produce squares of first N natural numbers
+
+
+def squaregenerator(n):
+    a=1
+    while n:
+        yield a**2
+        a+=1
+        n-=1
+n= int(input("enter a number"))
+for i in squaregenerator(n):
+    print(i,end=' ')
+
+
+
+5. Create a generator to produce first n terms of Fibonacci series
+
+
+def fabgenerator(n):
+    n1,n2=0,1
+    while n:
+        yield n1
+        n1,n2=n2,n1+n2
+        n-=1
+n=int(input("enter the range"))        
+for i in fabgenerator(n):
+    print(i)
+
+
+
+6. Create a generator to produce first n prime numbers
+
+
+def primegenerator(n):
+    a=2
+    while n:
+        for i in range(2,a):
+            if a%i==0:
+                break
+        else:
+           yield a
+           n-=1
+        a+=1    
+
+
+
+7. Create an endless iterator using generator method to produce terms of Fibonacci series
+
+
+def fib():
+    a,b=0,1
+    while True:
+        yield a
+        a,b=b,a+b
+
+it=fib()
+fib_list=[]
+while True:
+    print("do you want to generate another element y/n")
+    ans=input()
+    if ans=='y':
+        fib_list.append(next(it))
+    else:
+        break
+
+
+
+8. Create an endless iterator using generator method to produce Prime numbers
+
+
+def prime():
+    a=2
+    while True:
+        for i in range(2,a):
+            if a%i==0:
+               break
+        else:
+            yield a
+        a+=1
+it=prime()
+prime_list=[]
+while True:
+    print("do you waNt to print another number y/n")
+    result=input()
+    if result=='y':
+        prime_list.append(next(it))
+    else:
+         break
+print(prime_list)      
+
+
+
+9. Define a function which takes lengths of three sides of a triangle as arguments and display the perimeter or triangle. Define and apply a decorator which checks for the validity of the triangle on the basis of lengths of the side. This makes the perimeter to be displayed when the triangle can exist with the given lengths of the sides.
+
+
+def deco_perimeter(perimeter):
+    def validity(a,b,c):
+        if a+b>c and b+c>a and c+a>b:
+            print("valid")
+        else:
+            print("not valid")
+        perimeter(a,b,c)
+    return validity
+@deco_perimeter
+def perimeter(n1,n2,n3):
+    p=a+b+c
+    print("perimeter is",p)
+print("enter three numbers")
+a,b,c=int(input()),int(input()),int(input())  
+perimeter(a,b,c)
+
+
+
+
+10. Define a function which calculates HCF of two numbers. Define and apply a decorator to check whether two given numbers are co-prime or not.
+
+
+import math
+def deco_hcf(hcf):
+    def co_prime(a,b):
+        z=math.gcd(a,b)
+        if z==1:
+            print("co- prime")
+
+        else:
+            print("not co-prime")
+        hcf(a,b)
+    return co_prime
+@deco_hcf
+def hcf(n1,n2):
+    z=(n1 if n1<n2 else n2)
+    for x in range(z,0,-1):
+        if n1%x==0 and n2%x==0:
+            break
+    print("hcf is",x)
+print("enter two numbers")
+a,b=int(input()),int(input())  
+hcf(a,b)
+
+
+
